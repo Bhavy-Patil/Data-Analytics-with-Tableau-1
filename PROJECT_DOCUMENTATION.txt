@@ -1,0 +1,80 @@
+================================================================================
+GLOBAL ELECTRIC MOBILITY INTELLIGENCE & ADOPTION STUDY - PROJECT DOSSIER
+Focus: Macroeconomic Powertrain Trends, OEM Market Share & Battery Transition
+================================================================================
+
+1. EXECUTIVE SUMMARY & STRATEGIC CONTEXT
+--------------------------------------------------------------------------------
+This project delivers a comprehensive intelligence platform analyzing 200,000 
+commercial and passenger electric vehicle data points across worldwide assembly 
+hubs and consumer markets. The analytics pipeline evaluates market penetration, 
+battery pack chemistry viability, range-to-capacity efficiency ratios, and 
+lifecycle carbon emissions displacement.
+
+Target Stakeholder Personas:
+- Chief Strategy Officer (Automotive OEM): Portfolio white-space identification
+  and segment pricing strategies.
+- Mobility Fleet Director: Total cost of ownership, mean autonomy per charge,
+  and consumer reliability satisfaction scores.
+- Clean Energy Policy Advisor: Territorial manufacturing capacity, battery raw
+  material transitions, and gross carbon offsets.
+
+2. DATA ARCHITECTURE & CORE PIPELINE
+--------------------------------------------------------------------------------
+- Observation Volume: 200,000 validated records
+- Dimensional Fields: 39 analytical attributes (technological, financial, geographic)
+- Relational Schema: Ingested via PostgreSQL/MySQL `fact_ev_market_records`
+  with composite B-Tree indexing on vehicle segment, OEM brand, and build year.
+
+3. TAILORED TABLEAU CALCULATED FIELDS
+--------------------------------------------------------------------------------
+* Calc 1 - Deliveries in Millions:
+    [Annual Sales Units] / 1000000
+
+* Calc 2 - High Autonomy Index:
+    IF [Driving Range Km] >= 350 AND [Battery Capacity Kwh] <= 85 
+    THEN "Optimal Efficiency Tier" 
+    ELSE "Standard Tier" 
+    END
+
+* Calc 3 - Market Segment Classifier:
+    IF [Price USD] < 30000 THEN "Entry Mobility"
+    ELSEIF [Price USD] <= 60000 THEN "Mid-Tier Commercial/Family"
+    ELSEIF [Price USD] <= 100000 THEN "Premium Performance"
+    ELSE "Ultra-Luxury / Specialized"
+    END
+
+* Calc 4 - Specific Battery Productivity (km/kWh):
+    AVG([Driving Range Km]) / AVG([Battery Capacity Kwh])
+
+* Calc 5 - Commercial Sales Notation:
+    "$" + STR(ROUND(SUM([Annual Sales Units]) / 1000000, 1)) + "M Delivered"
+
+4. VISUALIZATION SUITE (7 WORKSHEETS & KPI HUD)
+--------------------------------------------------------------------------------
+- Telemetry Banner: Monitored OEMs (200+) | Nameplates (17,980) | Sales ($1,550.7M)
+  Fleet Score (4.0/5.0) | Mean Range (324.5 km) | Mean Pack (78.2 kWh)
+- Sheet A: Segment Delivery Volume & Market Contribution (Horizontal Ranked Bar)
+- Sheet B: OEM Market Concentration & Unit Leadership (Pareto Chart / Sorted Bars)
+- Sheet C: Fleet Satisfaction & Reliability Heatmap by Segment (Visual Matrix / Treemap)
+- Sheet D: Multi-Year Longitudinal Adoption Curve (Area & Trend Run-Chart)
+- Sheet E: Battery Chemistry Transition & Pack Density (Donut / Proportional Area)
+- Sheet F: Global EV Assembly Hubs & Supply Logistics (Choropleth World Geography)
+
+5. TABLEAU STORY ARC (8 INTERACTIVE BEATS)
+--------------------------------------------------------------------------------
+- Beat 1: Global Powertrain Landscape - Macro Industry Snapshot
+- Beat 2: Segment Breakdown - Urban Commuters vs. Long-Haul Platforms
+- Beat 3: OEM League Table - Dominant Players & Emerging Disruptors
+- Beat 4: User Sentiment & Reliability Benchmarks across Classes
+- Beat 5: Historical Trajectory - Multi-Year Deliveries Acceleration
+- Beat 6: Chemical Substrates - NMC, LFP, and Next-Gen Solid-State Shifts
+- Beat 7: Regional Assembly Clusters - East Asia, Europe & Americas
+- Beat 8: Executive Horizon - Forecasted Electrification Bottlenecks
+
+6. PERFORMANCE OPTIMIZATION
+--------------------------------------------------------------------------------
+- Tableau Data Extract (.hyper) optimized for 200,000 rows.
+- Dynamic global filtering responding under 800ms.
+- Asynchronous web embed using Tableau Embedding API v3 with responsive container styling.
+================================================================================

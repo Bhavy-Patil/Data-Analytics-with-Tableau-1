@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global EV Mobility Intelligence Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Tableau Javascript Embedding API v3 -->
+    <script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
+</head>
+<body>
+    <header class="top-header">
+        <div class="brand-wrapper">
+            <div class="brand-icon">&Delta;</div>
+            <div class="brand-title">
+                <h1>Global EV Mobility Intelligence Portal</h1>
+                <p>Cross-Market Powertrain Benchmarking & OEM Analytics</p>
+            </div>
+        </div>
+        <div class="header-status">
+            <div class="live-pill">
+                <span class="live-indicator"></span>
+                Tableau Engine Active
+            </div>
+        </div>
+    </header>
+
+    <main class="app-container">
+        <!-- Telemetry & Portfolio Metrics -->
+        <section class="telemetry-grid">
+            <div class="telemetry-card">
+                <div class="metric-label">Monitored OEMs</div>
+                <div class="metric-number">{{ metrics.oem_count }}</div>
+                <div class="metric-sub">&uarr; Global Footprint</div>
+            </div>
+            <div class="telemetry-card">
+                <div class="metric-label">Vehicle Nameplates</div>
+                <div class="metric-number">{{ metrics.catalog_models }}</div>
+                <div class="metric-sub">Active Architecture</div>
+            </div>
+            <div class="telemetry-card">
+                <div class="metric-label">Volume Deliveries</div>
+                <div class="metric-number">{{ metrics.gross_volume_sales }}</div>
+                <div class="metric-sub">Commercial Gross</div>
+            </div>
+            <div class="telemetry-card">
+                <div class="metric-label">Fleet Satisfaction</div>
+                <div class="metric-number">{{ metrics.fleet_satisfaction_score }}</div>
+                <div class="metric-sub">Composite Rating</div>
+            </div>
+            <div class="telemetry-card">
+                <div class="metric-label">Mean Autonomy</div>
+                <div class="metric-number">{{ metrics.mean_autonomy_range }}</div>
+                <div class="metric-sub">WLTP Baseline</div>
+            </div>
+            <div class="telemetry-card">
+                <div class="metric-label">Mean Pack Capacity</div>
+                <div class="metric-number">{{ metrics.mean_pack_capacity }}</div>
+                <div class="metric-sub">Lithium & Solid-State</div>
+            </div>
+        </section>
+
+        <!-- Executive Analytics & Story Viewport -->
+        <section class="analytics-section">
+            <div class="analytics-header">
+                <div class="analytics-title">
+                    <h2>Executive Mobility Intelligence Studio</h2>
+                    <p>Interactive synthesis across powertrain segments, brand concentration, battery chemistry lifecycles, and geographic hub capacity.</p>
+                </div>
+                <div class="filter-badge-row">
+                    <span class="filter-pill">N=200k Records</span>
+                    <span class="filter-pill">Interactive Storypoints</span>
+                </div>
+            </div>
+            <div class="tableau-viewport">
+                <!-- Replace 'src' with your friend's Tableau Public link or keep as placeholder -->
+                <tableau-viz 
+                    id="tableauViz" 
+                    src="https://public.tableau.com/views/EVMarketPerformanceInsights/Dashboard1"
+                    toolbar="bottom" 
+                    hide-tabs="false">
+                </tableau-viz>
+            </div>
+        </section>
+    </main>
+
+    <footer class="portal-footer">
+        <p>Global EV Mobility Intelligence Portal &bull; Enterprise BI Architecture &bull; Built with Tableau & Flask</p>
+    </footer>
+</body>
+</html>
